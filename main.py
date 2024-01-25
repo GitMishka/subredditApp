@@ -1,27 +1,22 @@
 import praw
 
+subreddit_name = input("Enter the subreddit name: ")
+filter_type = input("Choose the filter (hot, new, top): ").lower()
+
 reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
                      client_secret='YOUR_CLIENT_SECRET',
                      user_agent='YOUR_APP_NAME')
 
-subreddit_name = 'SubredditName'
-
 subreddit = reddit.subreddit(subreddit_name)
 
-print(f"Latest posts in /r/{subreddit_name}:\n")
-for post in subreddit.new(limit=10):  # You can change 'new' to 'hot', 'top', etc.
-    print(f"Title: {post.title}\nURL: {post.url}\n")
+print(f"Fetching {filter_type} posts from /r/{subreddit_name}:")
 
-# import praw
+if filter_type == "hot":
+    posts = subreddit.hot(limit=10)
+elif filter_type == "top":
+    posts = subreddit.top(limit=10)
+else:  
+    posts = subreddit.new(limit=10)
 
-# subreddit_name = input("Enter the subreddit name: ")
-
-# reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-#                      client_secret='YOUR_CLIENT_SECRET',
-#                      user_agent='YOUR_APP_NAME')
-
-# subreddit = reddit.subreddit(subreddit_name)
-
-# print(f"Fetching new posts from /r/{subreddit_name}:")
-# for post in subreddit.new(limit=10):
-#     print(post.title)
+for post in posts:
+    print(f"{post.title} (Upvotes: {post.ups})")
