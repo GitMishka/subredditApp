@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts in {{ subreddit_name }}</title>
+</head>
+<body>
+    <h1>Posts in r/{{ subreddit_name }}</h1>
+    <ul>
+        {% for post in posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% else %}
+        <li>No posts found.</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Search another subreddit</a>
+</body>
+</html>
