@@ -3,7 +3,6 @@ import praw
 
 app = Flask(__name__)
 
-# Initialize PRAW with your Reddit application credentials
 reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
                      client_secret='YOUR_CLIENT_SECRET',
                      user_agent='YOUR_APP_NAME')
