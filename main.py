@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 import praw
-
+import config
 app = Flask(__name__)
 
-reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                     client_secret='YOUR_CLIENT_SECRET',
-                     user_agent='YOUR_APP_NAME')
+user_agent = "Searchbot_01"
+reddit = praw.Reddit(username=config.reddit_username,
+                    password =config.reddit_password,
+                    client_id=config.reddit_client_secret,
+                    client_secret= config.reddit_client_id,
+                    user_agent=user_agent,
+                    check_for_async=False)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
